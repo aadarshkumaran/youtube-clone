@@ -146,7 +146,7 @@ export const Menu = () => {
             <Item>
             About Press Copyright Contact us Creators Advertise Developers 
             Terms Privacy Policy & Safety How YouTube works Test new features
-            © 2022 Google LLC
+            © 2022 Google LLC.
             </Item>
         </Wrapper>
     </Container>
