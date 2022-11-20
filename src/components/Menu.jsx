@@ -1,3 +1,4 @@
+//Menu Design Module - Aadarsh 20.11.2022
 import React from 'react'
 import styled from 'styled-components';
 import Mixtube from '../images/youtube-logo.png';
@@ -5,6 +6,7 @@ import HomeIcon from '@mui/icons-material/Home';//Home
 import SubscriptionsIcon from '@mui/icons-material/Subscriptions';//Subscriptions
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';//Videos
 import HistoryIcon from '@mui/icons-material/History';//History
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';//Signin
 import WhatshotIcon from '@mui/icons-material/Whatshot';//Trending
 import MusicNoteOutlinedIcon from '@mui/icons-material/MusicNoteOutlined';//Music
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';//Movies
@@ -19,20 +21,23 @@ import SettingsIcon from '@mui/icons-material/Settings';//Settings
 import FlagIcon from '@mui/icons-material/Flag';//Report History
 import HelpIcon from '@mui/icons-material/Help';//Help
 import FeedbackIcon from '@mui/icons-material/Feedback';//Report Feedback
+import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness';//Dark/Light Theme
 
 
 
 const Container = styled.div`
 flex:1;
-background-color: #202020;
-height: 120vh;
-color: white;
+background-color: ${({theme}) =>theme.bg};
+height: 128vh;
+color: ${({theme}) =>theme.text};
 font-style: 14px;
-`;
+position: sticky;//our menu gets sticked eventhough the user scrolls down the page
+top:0;
+`;//Container for menu section
 
 const Wrapper = styled.div`
     padding: 18px 26px;
-`
+`;//provide a default structure to display the child components.
 
 const Logo = styled.div`
     display: flex;
@@ -41,24 +46,49 @@ const Logo = styled.div`
     font-family: Arial;
     font-weight: bold;
     margin-bottom: 25px;
-`
+`;//Logo Text Style
+
 const Img = styled.img`
     height: 25px;
-`
+`;//Logo Image
 
 const Item = styled.div`
     display: flex;
     align-items: center;
     gap: 20px;
     padding: 7px 0px;
-`
+`;//Menu Items
 
 const Hr = styled.hr`
 margin: 15px 0px;
-border: 0.5px solid #373737;
-` // horizontal rule
+border: 0.5px solid ${({theme}) =>theme.soft};
+`; // horizontal rule
 
-export const Menu = () => {
+const Login = styled.div`
+`;
+
+const LoginButton = styled.button`
+  padding  : 5px 15px;
+  background-color: transparent;
+  border: 1px solid #3ea6ff;
+  color: #3ea6ff;
+  border-radius: 25px;// Making border circled
+  font-weight: 500px;
+  margin-top: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  gap:5px;
+`;
+
+const Title = styled.text`
+    font-size: 20px;
+    color:${({theme}) =>theme.text};
+    margin-bottom: 20px;
+`
+
+export const Menu = ({darkMode, setDarkMode}) => {
   return (
     <Container>
         <Wrapper>
@@ -84,6 +114,13 @@ export const Menu = () => {
                 History
             </Item>
             <Hr/>
+            <Login>Sign in to like videos, comment, and subscribe.
+                <LoginButton><AccountCircleIcon/>Sign in</LoginButton>
+            </Login>
+            <Hr/>
+            <Title>
+            Explore
+            </Title>
             <Item>
                 <WhatshotIcon/>
                 Trending
@@ -141,6 +178,10 @@ export const Menu = () => {
             <Item>
                 <FeedbackIcon/>
                 Report Feedback
+            </Item>
+            <Item onClick={()=>setDarkMode(!darkMode)}>
+                <SettingsBrightnessIcon/>
+                Light Mode
             </Item>
             <Hr/>
             <Item>
