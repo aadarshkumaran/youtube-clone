@@ -27,8 +27,8 @@ import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness';//Da
 
 const Container = styled.div`
 flex:1;
-background-color: ${({theme}) =>theme.bg};
-height: 128vh;
+background-color: ${({theme}) =>theme.bgLighter};
+height: 100%;
 color: ${({theme}) =>theme.text};
 font-style: 14px;
 position: sticky;//our menu gets sticked eventhough the user scrolls down the page
