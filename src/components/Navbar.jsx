@@ -9,6 +9,7 @@ position:sticky;
 top:0;
 background-color: ${({theme}) =>theme.bgLighter};
 height: 56px;
+color:${({ theme }) => theme.text};
 `;
 
 const Wrapper = styled.div`

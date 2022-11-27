@@ -22,6 +22,7 @@ import FlagIcon from '@mui/icons-material/Flag';//Report History
 import HelpIcon from '@mui/icons-material/Help';//Help
 import FeedbackIcon from '@mui/icons-material/Feedback';//Report Feedback
 import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness';//Dark/Light Theme
+import { Link } from 'react-router-dom';
 
 
 
@@ -92,14 +93,18 @@ export const Menu = ({darkMode, setDarkMode}) => {
   return (
     <Container>
         <Wrapper>
+        <Link to="/" style={{textDecoration:"none", color:"inherit"}}>
             <Logo>
                 <Img src={Mixtube}/>
                 MixTube
             </Logo>
+        </Link>
+        <Link to="/" style={{textDecoration:"none", color:"inherit"}}>
             <Item>
                 <HomeIcon/>
                 Home
             </Item>
+        </Link>
             <Item>
                 <SubscriptionsIcon/>
                 Subscriptions
@@ -181,7 +186,7 @@ export const Menu = ({darkMode, setDarkMode}) => {
             </Item>
             <Item onClick={()=>setDarkMode(!darkMode)}>
                 <SettingsBrightnessIcon/>
-                Light Mode
+                {darkMode ? "Dark" : "Light"} Mode
             </Item>
             <Hr/>
             <Item>
