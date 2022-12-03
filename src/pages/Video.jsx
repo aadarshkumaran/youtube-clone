@@ -4,7 +4,8 @@ import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
 import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
 import PlaylistAddOutlinedIcon from '@mui/icons-material/PlaylistAddOutlined';
-import { fontSize } from '@mui/system';
+import Comments from './Comments';
+import Card from '../components/Card';
 
 const Container = styled.div`
 display: flex;
@@ -134,8 +135,18 @@ export const Video = () => {
           </ChannelInfo>
           <Subscribe>Subscribe</Subscribe>
         </Channel>
+        <Hr/>
+        <Comments/>
       </Content>
-      <Recommendation>Recommendation</Recommendation>
+      <Recommendation>
+        <Card type="sm"/>
+        <Card type="sm"/>
+        <Card type="sm"/>
+        <Card type="sm"/>
+        <Card type="sm"/>
+        <Card type="sm"/>
+        <Card type="sm"/>
+      </Recommendation>
     </Container>
   )
 }

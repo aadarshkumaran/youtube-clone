@@ -58,6 +58,10 @@ const Item = styled.div`
     align-items: center;
     gap: 20px;
     padding: 7px 0px;
+
+    &:hover{
+        background-color: ${({theme}) =>theme.soft};
+    }
 `;//Menu Items
 
 const Hr = styled.hr`
