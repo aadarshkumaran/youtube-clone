@@ -45,13 +45,13 @@ color: ${({theme}) =>theme.text};
 `
 
 const ChannelName = styled.text`
-font-style: 14px;
+font-size: 14px;
 color: ${({theme}) =>theme.textSoft};
 margin: 9px 0px;
 `
 
 const Info = styled.div`
-font-style: 14px;
+font-size: 14px;
 color: ${({theme}) =>theme.textSoft};
 `
 
