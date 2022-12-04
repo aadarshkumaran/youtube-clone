@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Comment from './Comment'
+import Comment from '../components/Comment'
 
 const Container = styled.div``
 
