@@ -124,7 +124,9 @@ export const Menu = ({darkMode, setDarkMode}) => {
             </Item>
             <Hr/>
             <Login>Sign in to like videos, comment, and subscribe.
+                <Link to="signin" style={{textDecoration:"none"}}>
                 <LoginButton><AccountCircleIcon/>Sign in</LoginButton>
+                </Link>
             </Login>
             <Hr/>
             <Title>
