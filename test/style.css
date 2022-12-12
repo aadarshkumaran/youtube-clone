@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+    font-family: roboto;
+}
+
+body{
+    background-color: #333;
+    color:#fff
+}
+
+nav{
+    height: 100px;
+}
+
+.navbar nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar li{
+    display: inline;
+    padding: 14px;
+    margin: 15px 16px;
+}
+
+.navbar a{
+    color: gray;
+    font-size: 30px;
+    text-decoration: none;
+    height: 100%;
+    width:100%
+}
+
+.navbar a:hover{
+    text-decoration: underline;
+    text-underline-offset: 10px;
+    color: antiquewhite;
+}
+
+/* --------------------home---------------------- */
+
+.subscribe {
+    margin-top: 7%;
+    margin-left: 140px;
+    width: 45%;
+    display: block;
+}
+
+.subscribe h1{
+    font-size: 100px;
+}
+
+.subscribe form input{
+    display: grid;
+    margin: 14px 16px;
+    padding: 10px 60px;
+    border-radius: 20px;
+
+}
+
+#submit{
+    display: inline;
+    margin: 14px 16px;
+    padding: 10px 60px;
+    border-radius: 20px;
+    background-color: goldenrod;
+}
+
+.photo{
+    position: absolute;
+    top: 320px;
+    left: 1105px;
+    
+}
+
+
+
+
+
+
+
+
