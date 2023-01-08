@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 // import { Link, Route, Routes } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { format } from 'timeago.js';
+import axios from 'axios';
 
 const Container = styled.div`
 color: ${({theme}) =>theme.text};
@@ -56,17 +58,26 @@ color: ${({theme}) =>theme.textSoft};
 `
 
 
-const Card = ({type}) => {
+const Card = ({type,video}) => {
+  const[channel,setChannel] = useState({})
+
+  useEffect(()=>{
+    const fetchChannel = async() =>{
+      const res = await axios.get(`/users/find/${video.userId}`)
+      setChannel(res.data)
+    }
+    fetchChannel()
+  },[video.userId])
   return (
     <Link to="/video/test" style={{textDecoration:"none"}}>
     <Container type={type}>
-        <Image type={type} src="https://i.ytimg.com/vi/GUCOx-J4xZI/hqdefault.jpg?sqp=-oaymwEjCPYBEIoBSFryq4qpAxUIARUAAAAAGAElAADIQj0AgKJDeAE=&rs=AOn4CLD1MB_1S2kLGTL_0ISw19zn8eqAfw"/>
+        <Image type={type} src={video.thumbnail}/>
         <Details type={type}>
-          <ChannelLogo type={type} src="https://yt3.ggpht.com/vfVbKGrrGIuizrzSp8WylGf2iWykNuZGXFhx8N86UuS3Zqu7c0YChdZ4l11d38Y-vsX3mTqiDw=s900-c-k-c0x00ffffff-no-rj"/>
+          <ChannelLogo type={type} src={channel.img}/>
           <Texts>
-            <Title style={{margin: "3px 0px"}}>Valorant live india just chating match at 7 clock greyfox esports</Title>
-            <ChannelName style={{margin: "8px 0px"}}>Khelthuzad</ChannelName>
-            <Info style={{margin: "8px 0px"}}>1M views • 1 hour ago</Info>
+            <Title style={{margin: "3px 0px"}}>{video.title}</Title>
+            <ChannelName style={{margin: "8px 0px"}}>{channel.name}</ChannelName>
+            <Info style={{margin: "8px 0px"}}>{video.views} views • {format(video.createdAt)}</Info>
           </Texts>
         </Details>
     </Container>

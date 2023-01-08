@@ -1,5 +1,7 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+// import cors from 'cors'
 
 const Container = styled.div`
 display: flex;
@@ -33,6 +35,7 @@ border-radius: 3px;
 padding: 10px;
 background-color: transparent;
 width: 100%;
+color:${({ theme }) => theme.text};
 `
 
 const Button = styled.button`
@@ -61,19 +64,35 @@ margin-left: 30px;
 `
 
 const SignIn = () => {
+  const[name,setName] = useState("")
+  const[email,setEmail] = useState("")
+  const[password,setPassword] = useState("")
+
+  //bug - 19.12.2022
+  const handleLogin = async(e) => {
+    e.preventDefault()
+    try {
+      const res = await axios.post("http://localhost:8800/api/auth/signin/", {name,password},{withCredentials:true})
+      console.log(res.data);
+    } catch (err) {
+      
+    }
+  }
+
+
   return (
     <Container>
         <Wrapper>
             <Title>Sign In</Title>
             <Subtitle>to continue using MixTube</Subtitle>
-            <Input placeholder='Username'/>
-            <Input type="password" placeholder='Password'/>
-            <Button>Sign in</Button>
+            <Input placeholder='Username' onchange={e=>setName(e.target.value)}/>
+            <Input type="password" placeholder='Password' onchange={e=>setPassword(e.target.value)}/>
+            <Button onClick={handleLogin}>Sign in</Button>
             <Title>or</Title>
             <Subtitle>Create an Account</Subtitle>
-            <Input placeholder='Username'/>
-            <Input placeholder='E-mail Address'/>
-            <Input type="password" placeholder='Password'/>
+            <Input placeholder='Username' onchange={e=>setName(e.target.value)}/>
+            <Input placeholder='E-mail Address' onchange={e=>setEmail(e.target.value)}/>
+            <Input type="password" placeholder='Password' onchange={e=>setPassword(e.target.value)}/>
             <Button>Sign up</Button>
         </Wrapper>
         <More>

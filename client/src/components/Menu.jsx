@@ -109,10 +109,12 @@ export const Menu = ({darkMode, setDarkMode}) => {
                 Home
             </Item>
         </Link>
+        <Link to="subscriptions" style={{textDecoration:"none", color:"inherit"}}>
             <Item>
                 <SubscriptionsIcon/>
                 Subscriptions
             </Item>
+        </Link>
             <Hr/>
             <Item>
                 <VideoLibraryIcon/>
@@ -132,10 +134,12 @@ export const Menu = ({darkMode, setDarkMode}) => {
             <Title>
             Explore
             </Title>
+            <Link to="trends" style={{textDecoration:"none", color:"inherit"}}>
             <Item>
                 <WhatshotIcon/>
                 Trending
             </Item>
+            </Link>
             <Item>
                 <MusicNoteOutlinedIcon/>
                 Music
