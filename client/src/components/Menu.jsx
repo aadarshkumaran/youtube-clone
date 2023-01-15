@@ -23,6 +23,7 @@ import HelpIcon from '@mui/icons-material/Help';//Help
 import FeedbackIcon from '@mui/icons-material/Feedback';//Report Feedback
 import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness';//Dark/Light Theme
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 
 
 
@@ -94,6 +95,7 @@ const Title = styled.text`
 `
 
 export const Menu = ({darkMode, setDarkMode}) => {
+    const currentUser = useSelector(state=>state.user.currentUser)
   return (
     <Container>
         <Wrapper>
@@ -125,12 +127,16 @@ export const Menu = ({darkMode, setDarkMode}) => {
                 History
             </Item>
             <Hr/>
-            <Login>Sign in to like videos, comment, and subscribe.
-                <Link to="signin" style={{textDecoration:"none"}}>
-                <LoginButton><AccountCircleIcon/>Sign in</LoginButton>
-                </Link>
-            </Login>
-            <Hr/>
+            {!currentUser &&
+                <>
+                    <Login>Sign in to like videos, comment, and subscribe.
+                        <Link to="signin" style={{ textDecoration: "none" }}>
+                        <LoginButton><AccountCircleIcon />Sign in</LoginButton>
+                        </Link>
+                    </Login>
+                    <Hr />
+                </>
+            }
             <Title>
             Explore
             </Title>

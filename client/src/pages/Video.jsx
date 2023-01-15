@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ThumbDownOutlinedIcon from '@mui/icons-material/ThumbDownOutlined';
@@ -6,6 +6,11 @@ import ReplyOutlinedIcon from '@mui/icons-material/ReplyOutlined';
 import PlaylistAddOutlinedIcon from '@mui/icons-material/PlaylistAddOutlined';
 import Comments from '../components/Comments';
 import Card from '../components/Card';
+import {useDispatch, useSelector} from 'react-redux'
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { format } from 'timeago.js';
+import { fetchSuccess } from '../redux/videoSlice';
 
 const Container = styled.div`
 display: flex;
@@ -100,24 +105,46 @@ border:0.5px solid ${({ theme }) => theme.soft}; ;
 `
 
 export const Video = () => {
+  const currentUser = useSelector((state) => state.user)
+  const currentVideo = useSelector((state) => state.video.currentVideo)
+  const dispatch = useDispatch()
+
+  const path = useLocation().pathname.split("/")[2]
+
+  const[channel,setChannel] = useState({})
+
+  useEffect(()=>{
+    const fetchData = async() =>{
+      try {
+        const videoRes = await axios.get(`/videos/find/${path}`)
+        const channelRes = await axios.get(`/users/find/${videoRes.data.userId}`)
+        setChannel(channelRes.data)
+        dispatch(fetchSuccess(videoRes.data))
+      } catch (err) {
+
+      }
+    }
+    fetchData()
+  },[path,dispatch])
+
   return (
     <Container>
       <Content>
         <VideoWrapper>
-          <iframe width="100%" 
-          height="720" 
-          src="https://www.youtube.com/embed/gfin-ab7qgs"
-           title="YouTube video player" 
-           frameborder="0" 
-           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-           allowfullscreen>
+          <iframe width="100%"
+            height="720"
+            src="https://www.youtube.com/embed/gfin-ab7qgs"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
           </iframe>
         </VideoWrapper>
-        <Title>Valorant live india just chating match at 7 clock greyfox esports</Title>
+        <Title>{currentVideo.title}</Title>
         <Details>
-          <Info>7,987,964,313 views • 1 hour ago</Info>
+          <Info>{currentVideo.views} views • {format(currentVideo.createdAt)} </Info>
           <Buttons>
-            <Button><ThumbUpOutlinedIcon/>123</Button>
+            <Button><ThumbUpOutlinedIcon/>{currentVideo.likes?.length}</Button>
             <Button><ThumbDownOutlinedIcon/>Dislike</Button>
             <Button><ReplyOutlinedIcon style={{transform: "scaleX(-1)"}}/>Share</Button>
             <Button><PlaylistAddOutlinedIcon/>Save</Button>
@@ -126,11 +153,11 @@ export const Video = () => {
         <Hr/>
         <Channel>
           <ChannelInfo>
-            <ChannelImage src='https://yt3.ggpht.com/vfVbKGrrGIuizrzSp8WylGf2iWykNuZGXFhx8N86UuS3Zqu7c0YChdZ4l11d38Y-vsX3mTqiDw=s900-c-k-c0x00ffffff-no-rj'/>
+            <ChannelImage src={channel.img}/>
             <ChannelDetail>
-              <ChannelName>Khelthuzad</ChannelName>
-              <ChannelCounter>2.48k subscribers</ChannelCounter>
-              <Description> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Delectus nam cum neque veniam adipisci dolorem alias nobis quas, dolor dolores aperiam pariatur molestiae expedita! Officiis doloribus nulla eum aperiam tempore! </Description>
+              <ChannelName>{channel.name}</ChannelName> 
+              <ChannelCounter>{channel.subscribers} subscribers</ChannelCounter>
+              <Description>{currentVideo.desc}</Description>
             </ChannelDetail>
           </ChannelInfo>
           <Subscribe>Subscribe</Subscribe>
@@ -138,7 +165,7 @@ export const Video = () => {
         <Hr/>
         <Comments/>
       </Content>
-      <Recommendation>
+      {/* <Recommendation>
         <Card type="sm"/>
         <Card type="sm"/>
         <Card type="sm"/>
@@ -146,7 +173,7 @@ export const Video = () => {
         <Card type="sm"/>
         <Card type="sm"/>
         <Card type="sm"/>
-      </Recommendation>
+      </Recommendation> */}
     </Container>
   )
 }
